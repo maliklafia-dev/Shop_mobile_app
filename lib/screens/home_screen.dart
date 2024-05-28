@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         AppBar : barre de navigation
         Drawer : 
       */
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(),
       appBar: const AppbarWidget(),
       body: SingleChildScrollView(
         child: Column(

@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store/models/product.dart';
-import 'package:store/services/products_service.dart';
+import 'package:store/providers/categories_provider.dart';
+import 'package:store/services/categories_service.dart';
 import 'package:store/widgets/home/product_item_grid.dart';
 
-class ProductsGridWidget extends StatelessWidget {
-  ProductsGridWidget({super.key});
+class ProductCategoryWidget extends StatelessWidget {
+  ProductCategoryWidget({super.key});
   //instancier le service
-  final ProductsService _productService = ProductsService();
+  final CategoriesService _categoriesService = CategoriesService();
 
   @override
   Widget build(BuildContext context) {
-    //_productService.getProducts();
-    // inspect(_productService.getProducts());
-    /* 
-      widget FutureBuilder : à utiliser avec un Future
-      builder : permet de boucler sur les résultats renvoyés par la future 
-    */
-
     return FutureBuilder(
-      future: _productService.getProducts(),
+      future: _categoriesService.getProductsByCatgories(
+          context.watch<CategoriesProvider>().categories),
       builder: (context, snapshot) {
         //si les données sont accessibles
         if (snapshot.hasData) {
@@ -35,7 +31,7 @@ class ProductsGridWidget extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  'Our products',
+                  'Available products',
                   style: TextStyle(
                     fontSize: 30,
                   ),

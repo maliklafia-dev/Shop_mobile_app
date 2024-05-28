@@ -1,10 +1,27 @@
 //import des packages
 //bibliothèque materiel : bibliothèque de design de google
 import 'package:flutter/material.dart';
-import 'package:store/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:store/providers/cart_provider.dart';
+import 'package:store/providers/categories_provider.dart';
+import 'package:store/providers/product_provider.dart';
+
+import 'package:store/services/router_service.dart';
 
 //fonction main : point d'entrée de l'application
-void main() => runApp(const Store());
+void main() => runApp(
+      MultiProvider(providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CategoriesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        ),
+      ], child: const Store()),
+    );
 
 // widget (composant d'interface) Store : représente l'application
 class Store extends StatelessWidget {
@@ -26,6 +43,12 @@ class Store extends StatelessWidget {
   */
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: "Store", home: HomeScreen());
+    //la méthode roouter() est associée au package go_router
+    return MaterialApp.router(
+      title: "Store",
+      //home: HomeScreen());
+      //déléguer le routage de l'application au service router
+      routerConfig: RouterService.getRouter(),
+    );
   }
 }

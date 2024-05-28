@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 //Class du widget
+// ignore: must_be_immutable
 class AdsWidget extends StatefulWidget {
   AdsWidget({super.key});
 /*
@@ -53,7 +54,7 @@ class _AdsWidgetState extends State<AdsWidget> {
   @override
   void initState() {
     super.initState();
-    widget._timer = Timer.periodic(const Duration(seconds: 1), _setTimer);
+    widget._timer = Timer.periodic(const Duration(seconds: 2), _setTimer);
   }
 
   void _setTimer(Timer timer) {
